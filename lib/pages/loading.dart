@@ -12,9 +12,12 @@ class _LoadingState extends State<Loading> {
     Response response =
         await get(Uri.parse('https://jsonplaceholder.typicode.com/todos/1'));
     Map data = jsonDecode(response.body);
-    print(data);
-    print(data['title']);
+    setState(() {
+      text = data['title'];
+    });
   }
+
+  String text = 'Loading...';
 
   @override
   void initState() {
@@ -25,7 +28,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Loading Screen')),
+      body: Center(child: Text('$text')),
     );
   }
 }
